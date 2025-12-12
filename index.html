@@ -45,19 +45,17 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
     
-.dropdown-sites a {
-  display: block;
-  padding: 20px 100px;
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  transition: background 0.3s;
-  text-align: center;
-
-  white-space: nowrap; /* 🚫 запрещаем перенос */
-}
-
+    .dropdown-sites a {
+      display: block;
+      padding: 20px 100px;
+      font-size: 40px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+      text-align: center;
+      white-space: nowrap; /* 🚫 запрещаем перенос */
+    }
     
     .dropdown-sites a:hover {
       background-color: #374151;
@@ -172,7 +170,7 @@
 
     .top-controls {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       justify-content: space-between; 
       gap: 8px;
       max-width: 900px;
@@ -180,7 +178,6 @@
       align-items: center;
       padding-bottom: 8px;
       box-sizing: border-box;
-      overflow-x: auto;
     }
 
     .top-controls .btn-top {
@@ -498,20 +495,20 @@
       padding: 10px 0;
     }
 
-   .pill {
-  background: #fff;
-  border-radius: 20px;
-  padding: 0 20px; /* убираем вертикальный padding */
-  font-size: 20px;
-  font-weight: bold;
-  flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  height: 60px; /* фиксированная высота */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box; /* важно: padding включается в height */
-}
+    .pill {
+      background: #fff;
+      border-radius: 20px;
+      padding: 0 20px;
+      font-size: 20px;
+      font-weight: bold;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
 
     .controls input {
       width: 60px;
@@ -667,12 +664,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 50px 0; /* Увеличил отступы сверху и снизу */
+      margin: 50px 0;
       gap: 10px;
       flex-wrap: nowrap;
       width: 100%;
       max-width: 900px;
-      margin: 50px auto; /* Автоматические отступы по бокам и 50px сверху/снизу */
+      margin: 50px auto;
     }
 
     .pagination button {
@@ -790,12 +787,151 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Стили для модального окна поиска */
+    .search-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      backdrop-filter: blur(5px);
+    }
+
+    .search-modal-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      width: 90vw;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .search-modal h3 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #1a2f40;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f2f5;
+      margin-bottom: 20px;
+    }
+
+    .search-type-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-type-btn {
+      flex: 1;
+      padding: 15px 20px;
+      background: linear-gradient(to bottom, #1a2f40, #0d1a26);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-type-btn:hover {
+      background: linear-gradient(to bottom, #223a51, #0f2233);
+      transform: translateY(-2px);
+    }
+
+    .search-type-btn.active {
+      background: linear-gradient(to bottom, #dc143c, #b01030);
+    }
+
+    .search-input-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid #dc143c;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .search-input:focus {
+      border-color: #ff1940;
+      box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.3);
+    }
+
+    .search-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-buttons button {
+      flex: 1;
+      padding: 18px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn {
+      background: linear-gradient(to bottom, #dc143c, #b01030);
+      color: white;
+    }
+
+    .search-btn:hover {
+      background: linear-gradient(to bottom, #e51c47, #c01238);
+      transform: translateY(-2px);
+    }
+
+    .search-cancel-btn {
+      background: linear-gradient(to bottom, #1f2937, #0d1520);
+      color: white;
+    }
+
+    .search-cancel-btn:hover {
+      background: linear-gradient(to bottom, #2a3648, #111b29);
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body>
 <!-- Индикатор загрузки -->
 <div class="loader-container" id="loader">
   <div class="loader"></div>
+</div>
+
+<!-- Модальное окно поиска -->
+<div class="search-modal" id="searchModal">
+  <div class="search-modal-content">
+    <h3>Поиск детали</h3>
+    <div class="search-type-buttons">
+      <button class="search-type-btn active" data-type="partNumber">По номеру</button>
+      <button class="search-type-btn" data-type="partName">По названию</button>
+    </div>
+    <div class="search-input-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="Введите номер детали..." autofocus>
+    </div>
+    <div class="search-buttons">
+      <button class="search-btn" id="performSearch">Поиск</button>
+      <button class="search-cancel-btn" id="cancelSearch">Отмена</button>
+    </div>
+  </div>
 </div>
 
 <!-- Шапка -->
@@ -848,23 +984,22 @@
       </select>
     </div>
     
-  <button id="btnSearch" class="btn-top">
-    <i class="fas fa-search"></i> Поиск
-  </button>
+    <button id="btnSearch" class="btn-top">
+      <i class="fas fa-search"></i> Поиск
+    </button>
 
-  <button id="btnReset" class="btn-top">
-    <i class="fas fa-sync-alt"></i> Сбросить
-  </button>
+    <button id="btnReset" class="btn-top">
+      <i class="fas fa-sync-alt"></i> Сбросить
+    </button>
 
-<button onclick="window.location.href='https://smart-bowling.github.io/PARTS-STORE/'" class="btn-top">
-  <i class="fas fa-store"></i> Магазин
-</button>
+    <button onclick="window.location.href='https://smart-bowling.github.io/PARTS-STORE/'" class="btn-top">
+      <i class="fas fa-store"></i> Магазин
+    </button>
     
-  <button onclick="window.open('https://smart-bowling.github.io/ADD-PARTS-BB/', '_blank')" class="btn-top">
-    <i class="fas fa-plus-circle"></i> Добавить деталь
-  </button>
-</div>
-
+    <button onclick="window.open('https://smart-bowling.github.io/ADD-PARTS-BB/', '_blank')" class="btn-top">
+      <i class="fas fa-plus-circle"></i> Добавить деталь
+    </button>
+  </div>
 
   <div class="cards" id="cardsContainer"></div>
 
@@ -970,6 +1105,10 @@
     let totalPages = 1;
     const cardsPerPage = 5;
 
+    // Переменные для управления поиском
+    let currentSearchType = 'partNumber'; // 'partNumber' или 'partName'
+    let lastSearchTerm = '';
+
     // Основные функции приложения
     async function getEntries() {
       showLoader(true);
@@ -1047,6 +1186,7 @@
       div.className = 'card';
       div.dataset.row = entry.rowIndex;
       div.dataset.partNumber = entry.partNumber.toLowerCase();
+      div.dataset.partName = (entry.partName || '').toLowerCase();
 
       const media = document.createElement('div');
       media.className = 'media-block';
@@ -1169,7 +1309,11 @@
               partNameText.textContent = newName;
               // Обновляем название в массиве записей
               const updatedEntry = allEntries.find(e => e.partNumber === partNumber);
-              if (updatedEntry) updatedEntry.partName = newName;
+              if (updatedEntry) {
+                updatedEntry.partName = newName;
+                // Обновляем data-атрибут для поиска
+                div.dataset.partName = newName.toLowerCase();
+              }
             } else {
               alert(res.message || 'Ошибка при обновлении названия');
             }
@@ -1241,17 +1385,11 @@
 
     function updateTotalPages() {
       totalPages = Math.ceil(currentEntries.length / cardsPerPage) || 1;
-      console.log('Updated total pages:', totalPages);
     }
 
     function renderPage(page) {
-      console.log(`Rendering page ${page} of ${totalPages}`);
-      
       const container = document.getElementById('cardsContainer');
-      if (!container) {
-        console.error('Cards container not found!');
-        return;
-      }
+      if (!container) return;
       
       container.innerHTML = '';
 
@@ -1276,10 +1414,7 @@
 
     function renderPageNumbers() {
       const pageContainer = document.getElementById('pageNumbers');
-      if (!pageContainer) {
-        console.error('Page numbers container not found!');
-        return;
-      }
+      if (!pageContainer) return;
       
       pageContainer.innerHTML = '';
       
@@ -1358,29 +1493,75 @@
       currentPage = 1;
       renderPage(currentPage);
       document.getElementById('sortSelect').value = 'all';
+      lastSearchTerm = '';
     }
 
-    // Инициализация событий
-    document.getElementById('btnSearch')?.addEventListener('click', () => {
-      const term = prompt('Введите номер детали для поиска:');
-      if (term !== null) {
-        const searchTerm = term.toLowerCase().trim();
-        currentEntries = searchTerm.length === 0 
-          ? [...allEntries] 
-          : allEntries.filter(e => e.partNumber.toLowerCase().includes(searchTerm));
-        updateTotalPages();
-        currentPage = 1;
-        renderPage(currentPage);
-        document.getElementById('sortSelect').value = 'all';
+    // Функция для выполнения поиска
+    function performSearch(searchTerm) {
+      searchTerm = searchTerm.toLowerCase().trim();
+      lastSearchTerm = searchTerm;
+      
+      if (searchTerm.length === 0) {
+        currentEntries = [...allEntries];
+      } else {
+        if (currentSearchType === 'partNumber') {
+          // Поиск по номеру детали
+          currentEntries = allEntries.filter(e => 
+            e.partNumber.toLowerCase().includes(searchTerm)
+          );
+        } else {
+          // Поиск по названию детали
+          currentEntries = allEntries.filter(e => {
+            const partName = e.partName || '';
+            return partName.toLowerCase().includes(searchTerm);
+          });
+        }
       }
-    });
-
-    document.getElementById('btnReset')?.addEventListener('click', () => {
-      currentEntries = [...allEntries];
+      
       updateTotalPages();
       currentPage = 1;
       renderPage(currentPage);
       document.getElementById('sortSelect').value = 'all';
+    }
+
+    // Функции для работы с модальным окном поиска
+    function openSearchModal() {
+      const modal = document.getElementById('searchModal');
+      const searchInput = document.getElementById('searchInput');
+      const searchButtons = document.querySelectorAll('.search-type-btn');
+      
+      // Сбрасываем состояние
+      searchButtons.forEach(btn => {
+        if (btn.dataset.type === currentSearchType) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Устанавливаем placeholder в зависимости от типа поиска
+      searchInput.placeholder = currentSearchType === 'partNumber' 
+        ? 'Введите номер детали...' 
+        : 'Введите название детали...';
+      
+      // Очищаем поле ввода
+      searchInput.value = lastSearchTerm || '';
+      
+      // Показываем модальное окно
+      modal.style.display = 'flex';
+      searchInput.focus();
+      searchInput.select();
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModal').style.display = 'none';
+    }
+
+    // Инициализация событий
+    document.getElementById('btnSearch')?.addEventListener('click', openSearchModal);
+    
+    document.getElementById('btnReset')?.addEventListener('click', () => {
+      resetSearch();
     });
 
     document.getElementById('sortSelect')?.addEventListener('change', async function() {
@@ -1406,6 +1587,7 @@
         updateTotalPages();
         currentPage = 1;
         renderPage(currentPage);
+        lastSearchTerm = ''; // Сбрасываем поисковый запрос при смене фильтра
       } finally {
         showLoader(false);
       }
@@ -1418,6 +1600,48 @@
     document.getElementById('modalOverlay')?.addEventListener('click', (e) => {
       if (e.target === document.getElementById('modalOverlay')) {
         document.getElementById('modalOverlay').style.display = 'none';
+      }
+    });
+
+    // Обработчики для модального окна поиска
+    document.querySelectorAll('.search-type-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Удаляем активный класс у всех кнопок
+        document.querySelectorAll('.search-type-btn').forEach(b => b.classList.remove('active'));
+        // Добавляем активный класс текущей кнопке
+        this.classList.add('active');
+        // Обновляем текущий тип поиска
+        currentSearchType = this.dataset.type;
+        // Обновляем placeholder
+        const searchInput = document.getElementById('searchInput');
+        searchInput.placeholder = currentSearchType === 'partNumber' 
+          ? 'Введите номер детали...' 
+          : 'Введите название детали...';
+        searchInput.focus();
+      });
+    });
+
+    document.getElementById('performSearch')?.addEventListener('click', function() {
+      const searchTerm = document.getElementById('searchInput').value;
+      performSearch(searchTerm);
+      closeSearchModal();
+    });
+
+    document.getElementById('cancelSearch')?.addEventListener('click', closeSearchModal);
+
+    // Обработка нажатия Enter в поле поиска
+    document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const searchTerm = this.value;
+        performSearch(searchTerm);
+        closeSearchModal();
+      }
+    });
+
+    // Закрытие модального окна по клику вне его
+    document.getElementById('searchModal')?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSearchModal();
       }
     });
 
