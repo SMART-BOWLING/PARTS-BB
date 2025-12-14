@@ -1246,17 +1246,11 @@
 
     function updateTotalPages() {
       totalPages = Math.ceil(currentEntries.length / cardsPerPage) || 1;
-      console.log('Updated total pages:', totalPages);
     }
 
     function renderPage(page) {
-      console.log(`Rendering page ${page} of ${totalPages}`);
-      
       const container = document.getElementById('cardsContainer');
-      if (!container) {
-        console.error('Cards container not found!');
-        return;
-      }
+      if (!container) return;
       
       container.innerHTML = '';
 
@@ -1281,10 +1275,7 @@
 
     function renderPageNumbers() {
       const pageContainer = document.getElementById('pageNumbers');
-      if (!pageContainer) {
-        console.error('Page numbers container not found!');
-        return;
-      }
+      if (!pageContainer) return;
       
       pageContainer.innerHTML = '';
       
@@ -1367,47 +1358,20 @@
 
     // Функция для выполнения поиска
     function performSearch() {
-      // Спрашиваем, по чему искать
-      const searchType = prompt('Поиск по:\n1. Номеру детали\n2. Названию детали\n\nВведите 1 или 2:', '1');
-      
-      if (searchType === null) return; // Пользователь отменил
-      
-      let searchPrompt = '';
-      if (searchType === '1') {
-        searchPrompt = 'Введите номер детали для поиска:';
-      } else if (searchType === '2') {
-        searchPrompt = 'Введите название детали для поиска:';
-      } else {
-        alert('Пожалуйста, введите 1 или 2');
-        return;
+      const term = prompt('Введите номер детали или название для поиска:');
+      if (term !== null) {
+        const searchTerm = term.toLowerCase().trim();
+        currentEntries = searchTerm.length === 0 
+          ? [...allEntries] 
+          : allEntries.filter(e => 
+              e.partNumber.toLowerCase().includes(searchTerm) || 
+              (e.partName && e.partName.toLowerCase().includes(searchTerm))
+            );
+        updateTotalPages();
+        currentPage = 1;
+        renderPage(currentPage);
+        document.getElementById('sortSelect').value = 'all';
       }
-      
-      // Запрашиваем поисковую строку
-      const term = prompt(searchPrompt);
-      if (term === null) return; // Пользователь отменил
-      
-      const searchTerm = term.toLowerCase().trim();
-      if (searchTerm.length === 0) {
-        currentEntries = [...allEntries];
-      } else {
-        if (searchType === '1') {
-          // Поиск по номеру детали
-          currentEntries = allEntries.filter(e => 
-            e.partNumber.toLowerCase().includes(searchTerm)
-          );
-        } else {
-          // Поиск по названию детали
-          currentEntries = allEntries.filter(e => {
-            const partName = e.partName || '';
-            return partName.toLowerCase().includes(searchTerm);
-          });
-        }
-      }
-      
-      updateTotalPages();
-      currentPage = 1;
-      renderPage(currentPage);
-      document.getElementById('sortSelect').value = 'all';
     }
 
     // Инициализация событий
