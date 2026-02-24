@@ -1394,6 +1394,74 @@
   <div class="loader"></div>
 </div>
 
+<!-- ВНЕДРЕННАЯ АНИМАЦИЯ ЗАГРУЗКИ (без изменений) -->
+<div class="loading-screen" style="display: none;" id="customLoadingScreen">
+  <div class="logo-wrapper">
+    <div class="glow-ring"></div>
+    <img src="https://i.postimg.cc/wjGzSY92/1.png" alt="">
+  </div>
+</div>
+
+<style>
+/* Стили для анимации загрузки (вставлены без изменений) */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+}
+
+.logo-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glow-ring {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background: conic-gradient(#dc143c, transparent 100%);
+  animation: spin 5s linear infinite;
+  filter: blur(20px);
+}
+
+.loading-screen img {
+  width: 120px;
+  z-index: 2;
+}
+
+@keyframes spin {
+  to { transform: rotate(365deg); }
+}
+</style>
+
+<script>
+// Управление отображением анимации загрузки
+function showCustomLoader(show) {
+  const loader = document.getElementById('customLoadingScreen');
+  if (loader) {
+    loader.style.display = show ? 'flex' : 'none';
+  }
+}
+
+// Переопределяем функцию showLoader для использования обеих анимаций
+const originalShowLoader = showLoader;
+showLoader = function(show) {
+  // Показываем/скрываем стандартный индикатор
+  document.getElementById('loader').style.display = show ? 'flex' : 'none';
+  // Показываем/скрываем кастомную анимацию
+  showCustomLoader(show);
+};
+</script>
+
 <!-- Шапка -->
 <header>
   <div class="logo"><img src="https://i.postimg.cc/wjGzSY92/1.png" alt="Logo"></div>
