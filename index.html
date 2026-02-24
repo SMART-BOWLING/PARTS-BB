@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ДЕТАЛИ BB</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtSpKx0W/1.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -172,11 +173,20 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: #f0f2f5;
+    }
+
     body {
       margin: 0;
       padding: 20px;
       background: #f0f2f5;
       font-family: Arial, sans-serif;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
     }
 
     /* ИСПРАВЛЕНО: Убраны зазоры между кнопками */
@@ -784,7 +794,7 @@
       color: #666;
     }
 
-    /* НОВАЯ АНИМАЦИЯ ЗАГРУЗКИ */
+    /* НОВАЯ АНИМАЦИЯ ЗАГРУЗКИ - УВЕЛИЧЕНА В 2 РАЗА */
     .loading-screen {
       position: fixed;
       inset: 0;
@@ -793,12 +803,23 @@
       justify-content: center;
       align-items: center;
       z-index: 99999;
+      
+      /* Добавляем поддержку безопасной зоны на iPhone */
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      
+      /* Дополнительная защита для iOS */
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      
+      /* Убираем возможные отступы */
+      margin: 0;
+      box-sizing: border-box;
     }
 
     .logo-wrapper {
       position: relative;
-      width: 320px;
-      height: 320px;
+      width: 320px;  /* Увеличено в 2 раза (было 160px) */
+      height: 320px; /* Увеличено в 2 раза (было 160px) */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -806,16 +827,16 @@
 
     .glow-ring {
       position: absolute;
-      width: 160px;
-      height: 160px;
+      width: 160px;  /* Увеличено в 2 раза (было 80px) */
+      height: 160px; /* Увеличено в 2 раза (было 80px) */
       border-radius: 100%;
       background: conic-gradient(#dc143c, transparent 100%);
       animation: spin 5s linear infinite;
-      filter: blur(40px);
+      filter: blur(40px); /* Увеличено в 2 раза (было 20px) */
     }
 
     .loading-screen img {
-      width: 240px;
+      width: 240px;  /* Увеличено в 2 раза (было 120px) */
       z-index: 2;
     }
 
@@ -1399,7 +1420,7 @@
   </style>
 </head>
 <body>
-<!-- Новая анимация загрузки -->
+<!-- Новая анимация загрузки (увеличенная) -->
 <div class="loading-screen" id="loader">
   <div class="logo-wrapper">
     <div class="glow-ring"></div>
@@ -1412,7 +1433,7 @@
   <div class="logo"><img src="https://i.postimg.cc/wjGzSY92/1.png" alt="Logo"></div>
   <div class="site-name">
     <div class="site-name-dropdown" onclick="toggleSitesDropdown(event)">
-      <span class="site-name-text">BLOCKBUSTER</span> <!-- ← ДОБАВЛЕН КЛАСС -->
+      <span class="site-name-text">BLOCKBUSTER</span>
       <div class="dropdown-sites" id="sitesDropdown">
         <a href="https://smart-bowling.github.io/PARTS-KH/">LUCKY STRIKE KH</a>
         <a href="https://smart-bowling.github.io/PARTS-SKYMALL/">SKYMALL</a>
@@ -1580,7 +1601,7 @@
     let currentEntries = [];
     let currentPage = 1;
     let totalPages = 1;
-    const cardsPerPage = 30; // Оставляем 6 карточек на странице (по 3 в 2 ряда)
+    const cardsPerPage = 30;
 
     // Основные функции приложения
     async function getEntries() {
