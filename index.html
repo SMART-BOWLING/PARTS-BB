@@ -784,33 +784,43 @@
       color: #666;
     }
 
-    /* Стили для индикатора загрузки */
-    .loader-container {
+    /* НОВАЯ АНИМАЦИЯ ЗАГРУЗКИ */
+    .loading-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
+      inset: 0;
+      background: #1f2937;
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 99999;
-      display: none;
     }
 
-    .loader {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #f3f3f3;
-      border-top: 5px solid #dc143c;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .logo-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glow-ring {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      background: conic-gradient(#dc143c, transparent 100%);
+      animation: spin 5s linear infinite;
+      filter: blur(20px);
+    }
+
+    .loading-screen img {
+      width: 120px;
+      z-index: 2;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      to { transform: rotate(365deg); }
     }
     
     /* Для мобильных устройств (max-width: 1024px) */
@@ -1389,78 +1399,13 @@
   </style>
 </head>
 <body>
-<!-- Индикатор загрузки -->
-<div class="loader-container" id="loader">
-  <div class="loader"></div>
-</div>
-
-<!-- ВНЕДРЕННАЯ АНИМАЦИЯ ЗАГРУЗКИ (без изменений) -->
-<div class="loading-screen" style="display: none;" id="customLoadingScreen">
+<!-- Новая анимация загрузки -->
+<div class="loading-screen" id="loader">
   <div class="logo-wrapper">
     <div class="glow-ring"></div>
     <img src="https://i.postimg.cc/wjGzSY92/1.png" alt="">
   </div>
 </div>
-
-<style>
-/* Стили для анимации загрузки (вставлены без изменений) */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #1f2937;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100000;
-}
-
-.logo-wrapper {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.glow-ring {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  background: conic-gradient(#dc143c, transparent 100%);
-  animation: spin 5s linear infinite;
-  filter: blur(20px);
-}
-
-.loading-screen img {
-  width: 120px;
-  z-index: 2;
-}
-
-@keyframes spin {
-  to { transform: rotate(365deg); }
-}
-</style>
-
-<script>
-// Управление отображением анимации загрузки
-function showCustomLoader(show) {
-  const loader = document.getElementById('customLoadingScreen');
-  if (loader) {
-    loader.style.display = show ? 'flex' : 'none';
-  }
-}
-
-// Переопределяем функцию showLoader для использования обеих анимаций
-const originalShowLoader = showLoader;
-showLoader = function(show) {
-  // Показываем/скрываем стандартный индикатор
-  document.getElementById('loader').style.display = show ? 'flex' : 'none';
-  // Показываем/скрываем кастомную анимацию
-  showCustomLoader(show);
-};
-</script>
 
 <!-- Шапка -->
 <header>
@@ -1548,9 +1493,12 @@ showLoader = function(show) {
 </div>
 
 <script>
-  // Функция для показа/скрытия индикатора загрузки
+  // Функция для показа/скрытия новой анимации загрузки
   function showLoader(show) {
-    document.getElementById('loader').style.display = show ? 'flex' : 'none';
+    const loader = document.getElementById('loader');
+    if (loader) {
+      loader.style.display = show ? 'flex' : 'none';
+    }
   }
 
   // Функция для выпадающего меню
